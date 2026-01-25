@@ -1,0 +1,5 @@
+.direct-page {
+  min-height: 100vh;
+  background: rgb(11, 16, 20);
+  padding-top: 56px; /* altura do header fixo */
+}

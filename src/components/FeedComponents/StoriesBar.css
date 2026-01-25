@@ -1,0 +1,102 @@
+.stories-wrapper {
+  padding: 12px 16px;
+  overflow-x: auto;
+}
+
+.stories-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.stories-container {
+  display: flex;
+  gap: 10px;
+}
+
+/* ITEM */
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* BOTÃO */
+.story-button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* ANEL */
+.story-ring {
+  width: 79px;
+  height: 79px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, #44b051, #44b051);
+  position: relative;
+}
+
+.story-ring.locked {
+  background: #44b051;
+}
+
+.story-ring.self {
+  background: rgb(31, 41, 55);
+}
+
+/* AVATAR */
+.story-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgb(11, 16, 20);
+  padding: 2px;
+}
+
+.story-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+/* BLUR PARA BLOQUEADO */
+.story-ring.locked img {
+  filter: blur(5px);
+}
+
+/* BOTÃO + */
+.add-story {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+
+  background: #f9f9f9;
+  border: 2.6px solid rgb(31, 41, 55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-story span {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(31, 41, 55);
+}
+
+/* USERNAME */
+.story-username {
+  font-size: 12px;
+  color: rgb(209, 213, 219);
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

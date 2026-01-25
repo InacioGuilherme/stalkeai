@@ -1,0 +1,112 @@
+.feed-post {
+  background: rgb(11, 16, 20);
+  margin-bottom: 16px;
+}
+
+/* HEADER */
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+}
+
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgb(31, 41, 55);
+}
+
+.post-username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.post-menu {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+}
+
+/* CONTEÚDO */
+.post-image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: rgb(18, 24, 34);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BLOQUEIO CENTRAL */
+.post-restricted {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  transform: translateY(-6px); /* ajuste fino vertical */
+}
+
+.restricted-icon {
+  width: 42px;
+  height: 42px;
+  color: rgb(107, 114, 128);
+  margin-bottom: 10px;
+}
+
+.restricted-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(156, 163, 175);
+}
+
+.restricted-time {
+  font-size: 13px;
+  color: rgb(107, 114, 128);
+  margin-top: 2px;
+}
+
+/* AÇÕES */
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px 4px;
+}
+
+.post-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #fff;
+}
+
+.action-item img {
+  width: 22px;
+  height: 22px;
+}
+
+/* TEMPO */
+.post-time {
+  padding: 0 16px 10px;
+  font-size: 12px;
+  color: rgb(156, 163, 175);
+}

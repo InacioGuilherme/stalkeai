@@ -1,0 +1,13 @@
+.feed-page {
+  background: rgb(11, 16, 20);
+  color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.feed-content {
+  padding-top: 56px; /* espaço do header */
+}
+
+.feed-content {
+  padding-bottom: 56px; /* altura da BottomNav */
+}

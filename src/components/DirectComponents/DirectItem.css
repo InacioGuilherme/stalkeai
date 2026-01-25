@@ -1,0 +1,109 @@
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+}
+
+.chat-avatar-container {
+  flex-shrink: 0;
+}
+
+.chat-avatar-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.chat-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.chat-photo.blurred {
+  filter: blur(6px);
+  opacity: 0.8;
+}
+
+.chat-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f9f9f9;
+}
+
+.chat-message-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.chat-message-text {
+  font-size: 14px;
+  color: #8e9399;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-unread .chat-message-text {
+  font-weight: 500;
+  color: #f9f9f9;
+}
+
+.chat-time {
+  font-size: 14px;
+  color: #8e9399;
+  white-space: nowrap;
+}
+
+.chat-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.chat-camera-icon {
+  opacity: 0.9;
+}
+
+.chat-unread-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #1d9bf0;
+  border-radius: 50%;
+  position: relative;
+  top: 1px;
+}
+
+/* ===== LOCKED ===== */
+
+.chat-item.chat-locked .chat-message-text {
+  color: #8e9399;
+  font-weight: 400;
+}
+
+.chat-avatar-wrapper.locked .chat-lock-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-lock-icon {
+  opacity: 0.9;
+}
