@@ -1,0 +1,98 @@
+/* ===== CONTAINER FIXO DO INPUT ===== */
+.chat-input-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  padding: 8px 10px 12px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92),
+    rgba(0, 0, 0, 0.75)
+  );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  z-index: 100;
+}
+
+/* ===== PILL PRINCIPAL ===== */
+.chat-input-pill {
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #1c1f24;
+  border-radius: 999px;
+
+  padding: 0 12px;
+}
+
+/* ===== CAMERA ROXA (ESQUERDA) ===== */
+.chat-input-camera {
+  width: 30px;
+  height: 30px;
+
+  background: #5b4dff; /* roxo correto */
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.chat-input-camera img {
+  width: 16px;
+  height: 16px;
+
+  filter: brightness(0) invert(1);
+}
+
+/* ===== INPUT ===== */
+.chat-input-field {
+  flex: 1;
+  height: 100%;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #f1f1f1;
+  font-size: 14.5px;
+  line-height: 42px;
+
+  padding: 0 4px;
+}
+
+.chat-input-field::placeholder {
+  color: #9ca3af;
+}
+
+/* ===== ICONES À DIREITA ===== */
+.chat-input-icons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.chat-input-icons img {
+  width: 21px;
+  height: 21px;
+
+  opacity: 0.95;
+  filter: brightness(0) invert(1);
+}
+
+/* ===== SAFE AREA (iOS) ===== */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .chat-input-container {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+}

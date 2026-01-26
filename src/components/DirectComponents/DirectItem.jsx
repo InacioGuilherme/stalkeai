@@ -1,4 +1,5 @@
 import "./DirectItem.css";
+import DirectChatItem from "./DirectChatItem";
 
 import av1 from "../../assets/direct/av-fallback-3.jpg";
 import av2 from "../../assets/direct/av-fallback-8.jpg";
@@ -22,151 +23,57 @@ export default function DirectItem() {
         </symbol>
       </svg>
 
-      {/* ===== 4 CHATS NORMAIS ===== */}
+      <DirectChatItem
+        name="Jo*******"
+        avatar={av1}
+        message="G adivinha o que vc esqueceu aqui…"
+        time="Agora"
+        unread
+      />
 
-      {/* CHAT 1 — UNREAD */}
-      <div className="chat-item chat-unread">
-        <div className="chat-avatar-container">
-          <div className="chat-avatar-wrapper">
-            <img className="chat-photo blurred" src={av1} alt="" />
-          </div>
-        </div>
-        <div className="chat-content">
-          <h3 className="chat-name">Jo*******</h3>
-          <div className="chat-message-row">
-            <span className="chat-message-text">G adivinha o que vc esqueceu aqui…</span>
-            <span> · </span>
-            <span className="chat-time">Agora</span>
-          </div>
-        </div>
-        <div className="chat-actions">
-          <span className="chat-unread-dot" />
-          <svg className="chat-camera-icon" width="19.2" height="19.2">
-            <use href="#camera-icon" />
-          </svg>
-        </div>
-      </div>
+      <DirectChatItem
+        name="Edu*****"
+        avatar={av2}
+        message="Encaminhou um reel de jonas…"
+        time="33 min"
+      />
 
-      {/* CHAT 2 */}
-      <div className="chat-item">
-        <div className="chat-avatar-container">
-          <div className="chat-avatar-wrapper">
-            <img className="chat-photo blurred" src={av2} alt="" />
-          </div>
-        </div>
-        <div className="chat-content">
-          <h3 className="chat-name">Edu*****</h3>
-          <div className="chat-message-row">
-            <span className="chat-message-text">Encaminhou um reel de jonas…</span>
-            <span className="chat-time"> · 33 min</span>
-          </div>
-        </div>
-        <div className="chat-actions">
-          <svg className="chat-camera-icon" width="19.2" height="19.2">
-            <use href="#camera-icon" />
-          </svg>
-        </div>
-      </div>
+      <DirectChatItem
+        name="Fel*****"
+        avatar={av3}
+        message="Blz depois a gente se fala"
+        time="2 h"
+      />
 
-      {/* CHAT 3 */}
-      <div className="chat-item">
-        <div className="chat-avatar-container">
-          <div className="chat-avatar-wrapper">
-            <img className="chat-photo blurred" src={av3} alt="" />
-          </div>
-        </div>
-        <div className="chat-content">
-          <h3 className="chat-name">Fel*****</h3>
-          <div className="chat-message-row">
-            <span className="chat-message-text">Blz depois a gente se fala</span>
-            <span className="chat-time"> · 2 h</span>
-          </div>
-        </div>
-        <div className="chat-actions">
-          <svg className="chat-camera-icon" width="19.2" height="19.2">
-            <use href="#camera-icon" />
-          </svg>
-        </div>
-      </div>
+      <DirectChatItem
+        name="And*****"
+        avatar={av4}
+        message="Reagiu com 👍 à sua mensagem"
+        time="6 h"
+      />
 
-      {/* CHAT 4 */}
-      <div className="chat-item">
-        <div className="chat-avatar-container">
-          <div className="chat-avatar-wrapper">
-            <img className="chat-photo blurred" src={av4} alt="" />
-          </div>
-        </div>
-        <div className="chat-content">
-          <h3 className="chat-name">And*****</h3>
-          <div className="chat-message-row">
-            <span className="chat-message-text">Reagiu com 👍 à sua mensagem</span>
-            <span className="chat-time"> · 6 h</span>
-          </div>
-        </div>
-        <div className="chat-actions">
-          <svg className="chat-camera-icon" width="19.2" height="19.2">
-            <use href="#camera-icon" />
-          </svg>
-        </div>
-      </div>
-
-      {/* ===== 12 CHATS BLOQUEADOS ===== */}
       {[
-        ["Hei*****", av5, "2 d"],
-        ["Mat*****", av6, "3 d"],
-        ["Dan*****", av1, "3 d"],
-        ["Car*****", av2, "4 d"],
-        ["Leo*****", av3, "4 d"],
-        ["Raf*****", av4, "5 d"],
-        ["Gui*****", av5, "5 d"],
-        ["Bru*****", av6, "6 d"],
-        ["Jon*****", av1, "6 d"],
-        ["Vit*****", av2, "1 sem"],
-        ["Ali*****", av3, "1 sem"],
-        ["Mar*****", av4, "2 sem"],
-      ].map(([name, avatar, time], i) => (
-        <div className="chat-item chat-locked" key={i}>
-          <div className="chat-avatar-container">
-            <div className="chat-avatar-wrapper locked">
-              <img className="chat-photo blurred" src={avatar} alt="" />
-              <div className="chat-lock-overlay">
-                <svg
-                  className="chat-lock-icon"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M6 10V8a6 6 0 0112 0v2"
-                    stroke="#fff"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <rect
-                    x="5"
-                    y="10"
-                    width="14"
-                    height="10"
-                    rx="2"
-                    stroke="#fff"
-                    strokeWidth="2"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <div className="chat-content">
-            <h3 className="chat-name">{name}</h3>
-            <div className="chat-message-row">
-              <span className="chat-message-text">Enviou um reel</span>
-              <span className="chat-time"> · {time}</span>
-            </div>
-          </div>
-
-          <div className="chat-actions" />
-        </div>
+        ["Hei*****", av5, "Enviou um reel", "2 d"],
+        ["Mat*****", av6, "Curtiu sua foto", "3 d"],
+        ["Dan*****", av1, "Respondeu seu story", "3 d"],
+        ["Car*****", av2, "Reagiu 😅 ao story", "4 d"],
+        ["Leo*****", av3, "Enviou uma mensagem", "4 d"],
+        ["Raf*****", av4, "Compartilhou um post", "5 d"],
+        ["Gui*****", av5, "Respondeu com 👍", "5 d"],
+        ["Bru*****", av6, "Mandou um áudio", "6 d"],
+        ["Jon*****", av1, "Respondeu seu story", "6 d"],
+        ["Vit*****", av2, "Curtiu sua mensagem", "1 sem"],
+        ["Ali*****", av3, "Enviou um reel", "1 sem"],
+        ["Mar*****", av4, "Reagiu ❤️ à mensagem", "2 sem"],
+      ].map(([name, avatar, message, time], i) => (
+        <DirectChatItem
+          key={i}
+          name={name}
+          avatar={avatar}
+          message={message}
+          time={time}
+          locked
+        />
       ))}
     </>
   );
