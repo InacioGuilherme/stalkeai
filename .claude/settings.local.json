@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "mcp__ide__getDiagnostics",
-      "Bash(npx react-scripts build)"
+      "Bash(npx react-scripts build)",
+      "Bash(powershell -Command \"Get-ChildItem -Recurse -File src/assets | Sort-Object Length -Descending | Select-Object -First 30 @{Name=''SizeMB'';Expression={[math]::Round\\($_Length/1MB,2\\)}}, FullName\")",
+      "Bash(powershell -Command \"\\(Get-ChildItem -Recurse -File src/assets | Measure-Object -Property Length -Sum\\).Sum / 1MB\")",
+      "Bash(powershell -Command:*)"
     ]
   }
 }
