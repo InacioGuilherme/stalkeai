@@ -52,18 +52,7 @@ const MusicNote = ({ music }) => {
    STORIES DATA
    =============================== */
 
-const getOwnStory = () => {
-  const profile = JSON.parse(localStorage.getItem('current_profile') || '{}');
-  return {
-    name: "Sua nota",
-    note: "Conte as novidades",
-    avatar: profile.profileImageUrl || perfilEspionado,
-    isOwnStory: true
-  };
-};
-
-const STORIES = [
-  getOwnStory(),
+const OTHER_STORIES = [
   {
     name: "Ped*******",
     note: "Preguiça Hoje 🥱🥱",
@@ -153,11 +142,20 @@ const STORIES = [
 ];
 
 export default function DirectStories() {
+  const profile = JSON.parse(localStorage.getItem('current_profile') || '{}');
+  const ownStory = {
+    name: "Sua nota",
+    note: "Conte as novidades",
+    avatar: profile.profileImageUrl || perfilEspionado,
+    isOwnStory: true
+  };
+  const stories = [ownStory, ...OTHER_STORIES];
+
   return (
     <div className={styles.directStories}>
       <div className={styles.storiesWrapper}>
         <div className={styles.storiesScroll}>
-          {STORIES.map((story, index) => (
+          {stories.map((story, index) => (
             <div className={styles.storyCard} key={index}>
               {/* NOTA (overlay absoluto, SEM quebrar layout) */}
               <div className={`${styles.storyNote} ${story.isMusicNote ? styles.music : ""}`}>
