@@ -52,13 +52,18 @@ const MusicNote = ({ music }) => {
    STORIES DATA
    =============================== */
 
-const STORIES = [
-  {
+const getOwnStory = () => {
+  const profile = JSON.parse(localStorage.getItem('current_profile') || '{}');
+  return {
     name: "Sua nota",
     note: "Conte as novidades",
-    avatar: perfilEspionado,
+    avatar: profile.profileImageUrl || perfilEspionado,
     isOwnStory: true
-  },
+  };
+};
+
+const STORIES = [
+  getOwnStory(),
   {
     name: "Ped*******",
     note: "Preguiça Hoje 🥱🥱",

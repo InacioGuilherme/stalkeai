@@ -6,6 +6,7 @@ import BlockedScrollPopup from "../ChatComponents/BlockedScrollPopup";
 export default function DirectHeader() {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const username = localStorage.getItem('current_username') || 'Teste';
 
   return (
     <>
@@ -53,7 +54,7 @@ export default function DirectHeader() {
                 color: "#F9F9F9",
               }}
             >
-              Teste
+              {username}
             </h1>
           </div>
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./StoriesBar.module.css";
 import BlockedScrollPopup from "../ChatComponents/BlockedScrollPopup";
-import selfAvatar from "../../assets/feed/perfil-sem-foto.jpeg";
+import selfAvatarFallback from "../../assets/feed/perfil-sem-foto.jpeg";
 import av1 from "../../assets/feed/av-fallback-1.jpg";
 import av2 from "../../assets/feed/av-fallback-2.jpg";
 import av3 from "../../assets/feed/av-fallback-3.jpg";
@@ -28,6 +28,9 @@ const STORIES = [
 
 export default function StoriesBar() {
   const [showPopup, setShowPopup] = useState(false);
+
+  const profile = JSON.parse(localStorage.getItem('current_profile') || '{}');
+  const selfAvatar = profile.profileImageUrl || selfAvatarFallback;
 
   return (
     <>
