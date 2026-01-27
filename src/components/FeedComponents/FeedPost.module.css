@@ -22,7 +22,6 @@
   height: 32px;
   border-radius: 50%;
   background: rgb(31, 41, 55);
-  filter: blur(3px);
 }
 
 .postUsername {

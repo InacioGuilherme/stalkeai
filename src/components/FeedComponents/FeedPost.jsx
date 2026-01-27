@@ -8,14 +8,17 @@ import repostIcon from "../../assets/feed/repost.svg";
 import sendIcon from "../../assets/feed/enviar.svg";
 import saveIcon from "../../assets/feed/salvar.svg";
 
-export default function FeedPost({ username, avatar, likes, comments, time }) {
+export default function FeedPost({ username, avatar, likes, comments, time, blurLevel = 0 }) {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleBlocked = () => setShowPopup(true);
 
+  const blur = Math.max(0, (blurLevel - 2) * 1.5);
+  const postStyle = blur > 0 ? { filter: `blur(${blur}px)` } : undefined;
+
   return (
     <>
-      <article className={styles.feedPost}>
+      <article className={styles.feedPost} style={postStyle}>
 
         {/* HEADER */}
         <header className={styles.postHeader}>
