@@ -30,7 +30,10 @@ const ConfirmModal = ({
         <div className={styles.modalHeader}>
           <h3 className={styles.modalTitle}>Confirme o Instagram</h3>
           <p className={styles.modalSubtitle}>
-            Vamos realizar o teste do clone em um perfil com nome gerado de ? <span className={styles.highlightUsername}>@{username}</span>?
+            {modalProfileData.fromApi
+              ? <>Perfil encontrado! Confirmar teste com <span className={styles.highlightUsername}>@{username}</span>?</>
+              : <>Vamos realizar o teste do clone em um perfil com nome gerado de ? <span className={styles.highlightUsername}>@{username}</span>?</>
+            }
           </p>
         </div>
 
@@ -39,9 +42,9 @@ const ConfirmModal = ({
           {/* Foto à esquerda */}
           <div className={styles.profileImageContainer}>
             <div className={styles.profileImageWrapper}>
-              <img 
-                src={modalProfileData.profileImageUrl} 
-                alt="Foto de perfil" 
+              <img
+                src={modalProfileData.profileImageUrl}
+                alt="Foto de perfil"
                 onError={(e) => {
                   e.target.style.display = 'none';
                   e.target.nextElementSibling.style.display = 'flex';
@@ -53,6 +56,17 @@ const ConfirmModal = ({
                 </svg>
               </div>
             </div>
+            {modalProfileData.fullName && (
+              <div className={styles.profileName}>
+                <span className={styles.fullName}>{modalProfileData.fullName}</span>
+                {modalProfileData.is_verified && (
+                  <svg className={styles.verifiedBadge} viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="20" fill="#3897f0"/>
+                    <path d="M17.5 29.5L9 21l2.5-2.5 6 6 13-13L33 14z" fill="#fff"/>
+                  </svg>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Stats à direita */}

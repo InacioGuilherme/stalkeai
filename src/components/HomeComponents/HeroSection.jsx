@@ -8,6 +8,7 @@ const HeroSection = ({
   isBadgesVisible,
   username,
   showUsernameInput,
+  isLoading,
   onEspionarClick,
   onUsernameChange,
   onUsernameSubmit,
@@ -98,15 +99,20 @@ const HeroSection = ({
                     placeholder="Ex: nomedoconjuge_10"
                     className={styles.usernameInput}
                     autoFocus
+                    disabled={isLoading}
                   />
-                  <button 
-                    className={styles.confirmInputBtn}
+                  <button
+                    className={`${styles.confirmInputBtn} ${isLoading ? styles.loading : ''}`}
                     onClick={onUsernameSubmit}
-                    disabled={username.length < 3}
+                    disabled={username.length < 3 || isLoading}
                   >
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                    </svg>
+                    {isLoading ? (
+                      <div className={styles.spinner} />
+                    ) : (
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    )}
                   </button>
                 </div>
                 {username.length > 0 && username.length < 3 && (

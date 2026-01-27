@@ -20,6 +20,7 @@ const Home = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [modalProfileData, setModalProfileData] = useState(null);
   const [showInstagramLogin, setShowInstagramLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
   const trialActive = localStorage.getItem("trial_active");
@@ -98,26 +99,99 @@ const Home = () => {
     setShowUsernameInput(true);
   };
 
-  const handleUsernameSubmit = () => {
+  const fetchAvatarAsBase64 = async (imageUrl) => {
+    try {
+      const proxyRes = await fetch(
+        `/api/proxy-image?url=${encodeURIComponent(imageUrl)}`
+      );
+      if (!proxyRes.ok) throw new Error('Proxy falhou');
+      const { base64 } = await proxyRes.json();
+      return base64;
+    } catch {
+      return null;
+    }
+  };
+
+  const handleUsernameSubmit = async () => {
     const cleanUsername = username.trim().replace(/^@+/, '');
-    
+
     if (cleanUsername.length < 3) {
       alert('Digite um nome de usuário válido!');
       return;
     }
 
-    const mockProfileData = {
-      profileImageUrl: `https://i.pravatar.cc/150?u=${cleanUsername}`,
-      fullName: 'João Silva',
-      bio: 'Vivendo a vida! ✨\nApaixonado por viagens e fotografia 📸\n📍 São Paulo, Brasil',
-      postCount: Math.floor(Math.random() * 100) + 10,
-      followersCount: Math.floor(Math.random() * 10000) + 1000,
-      followingCount: Math.floor(Math.random() * 500) + 50,
-      is_private: Math.random() > 0.7
-    };
+    setIsLoading(true);
 
-    setModalProfileData(mockProfileData);
-    setShowConfirmModal(true);
+    try {
+      const response = await fetch(
+        `https://www.searchapi.io/api/v1/search?engine=instagram_profile&username=${encodeURIComponent(cleanUsername)}&api_key=AHZyZZs5YrMXeh2Tc6TFLCvv`
+      );
+
+      if (!response.ok) throw new Error('Erro na API');
+
+      const data = await response.json();
+      const profile = data.profile;
+
+      if (profile) {
+        const originalAvatarUrl = profile.avatar_hd || profile.avatar || '';
+
+        // Converte avatar para base64 via proxy (evita CORS do Instagram CDN)
+        let avatarBase64 = null;
+        if (originalAvatarUrl) {
+          avatarBase64 = await fetchAvatarAsBase64(originalAvatarUrl);
+        }
+
+        const profileData = {
+          profileImageUrl: avatarBase64 || `https://i.pravatar.cc/150?u=${cleanUsername}`,
+          fullName: profile.name || cleanUsername,
+          bio: profile.bio || '',
+          postCount: profile.posts || 0,
+          followersCount: profile.followers || 0,
+          followingCount: profile.following || 0,
+          is_private: false,
+          is_verified: profile.is_verified || false,
+          external_link: profile.external_link || null,
+          fromApi: true
+        };
+
+        setModalProfileData(profileData);
+
+        // Salva no histórico de usuários pesquisados
+        const savedUsers = JSON.parse(localStorage.getItem('searched_users') || '[]');
+        const alreadyExists = savedUsers.some(u => u.username === cleanUsername);
+        if (!alreadyExists) {
+          savedUsers.push({
+            username: cleanUsername,
+            ...profileData,
+            searchedAt: Date.now()
+          });
+          localStorage.setItem('searched_users', JSON.stringify(savedUsers));
+        }
+
+        setShowConfirmModal(true);
+      } else {
+        throw new Error('Perfil não encontrado');
+      }
+    } catch (error) {
+      console.warn('API falhou, usando dados mockados:', error.message);
+
+      const mockProfileData = {
+        profileImageUrl: `https://i.pravatar.cc/150?u=${cleanUsername}`,
+        fullName: cleanUsername,
+        bio: '',
+        postCount: Math.floor(Math.random() * 100) + 10,
+        followersCount: Math.floor(Math.random() * 10000) + 1000,
+        followingCount: Math.floor(Math.random() * 500) + 50,
+        is_private: Math.random() > 0.7,
+        is_verified: false,
+        fromApi: false
+      };
+
+      setModalProfileData(mockProfileData);
+      setShowConfirmModal(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleConfirmModal = async () => {
@@ -171,6 +245,7 @@ const Home = () => {
             isBadgesVisible={isBadgesVisible}
             username={username}
             showUsernameInput={showUsernameInput}
+            isLoading={isLoading}
             onEspionarClick={handleEspionarClick}
             onUsernameChange={(e) => setUsername(e.target.value)}
             onUsernameSubmit={handleUsernameSubmit}
