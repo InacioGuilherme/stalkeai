@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "./ChatHeader.module.css";
 import BlockedScrollPopup from "./BlockedScrollPopup";
 
-import { maskUsername } from "../../utils/maskUsername";
 import backIcon from "../../assets/chat/setaparaolado2.svg";
 import phoneIcon from "../../assets/chat/telefone.svg";
 import videoIcon from "../../assets/chat/video.svg";
@@ -12,10 +11,6 @@ import avatarFallback from "../../assets/chat/perfil-sem-foto.jpeg";
 export default function ChatHeader() {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
-  const profile = JSON.parse(localStorage.getItem('current_profile') || '{}');
-  const username = localStorage.getItem('current_username') || '';
-  const maskedName = maskUsername(username);
-  const chatAvatar = profile.profileImageUrl || avatarFallback;
 
   return (
     <>
@@ -30,7 +25,7 @@ export default function ChatHeader() {
               <span className={styles.chatPageAvatarGradient}>
                 <span className={styles.chatPageAvatarInner}>
                   <img
-                    src={chatAvatar}
+                    src={avatarFallback}
                     alt=""
                     className={styles.chatPageAvatarImg}
                   />
@@ -39,7 +34,7 @@ export default function ChatHeader() {
             </button>
 
             <button className={styles.chatPageNameBtn}>
-              <span className={styles.chatPageUserName}>{maskedName}</span>
+              <span className={styles.chatPageUserName}>Jo******</span>
               <span className={styles.chatPageUserStatus}>Online</span>
             </button>
           </div>

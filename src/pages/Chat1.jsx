@@ -14,8 +14,8 @@ import nudeImage from "../assets/chat/nudes1-chat1.jpg";
 
 export default function Chat1() {
   const [city, setCity] = useState("casa");
-  const username = localStorage.getItem('current_username') || 'G';
-  const initial = username.charAt(0).toUpperCase();
+  const profile = JSON.parse(localStorage.getItem('current_profile') || '{}');
+  const firstName = profile.fullName ? profile.fullName.split(' ')[0] : 'G';
 
   useEffect(() => {
     async function fetchLocation() {
@@ -159,7 +159,7 @@ export default function Chat1() {
 
         <ChatMessageTime time="16:53" />
 
-        <ChatMessageOther text={`${initial} adivinha o que vc esqueceu aqui? kkkk`} />
+        <ChatMessageOther text={`${firstName} adivinha o que vc esqueceu aqui? kkkk`} />
       </ChatBody>
 
       <ChatInput />
