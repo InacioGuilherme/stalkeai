@@ -52,6 +52,7 @@
   justify-content: center;
 
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .chatInputCamera img {
@@ -94,6 +95,7 @@
 
   opacity: 0.95;
   filter: brightness(0) invert(1);
+  cursor: pointer;
 }
 
 /* ===== SAFE AREA (iOS) ===== */

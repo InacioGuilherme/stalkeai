@@ -34,32 +34,32 @@ const Home = () => {
 
   // Animação de digitação
   useEffect(() => {
-    const fullTitle = "O que seu Cônjuge faz quando está no Instagram?";
-    const fullSubtitle = "Descubra a verdade sobre qualquer pessoa, acessando o instagram dela!";
+    const fullTitle = "Clone instagram ! feito em react jsx e com conversas feitas em props?";
+    const fullSubtitle = "Atenção! Dados imaginarios. Digite um username aleatorio para seguir ao redor da experiencia";
     
     const typeAnimation = async () => {
       for (let i = 0; i <= fullTitle.length; i++) {
         setTitleText(fullTitle.substring(0, i));
-        await new Promise(resolve => setTimeout(resolve, 60));
+        await new Promise(resolve => setTimeout(resolve, 40));
       }
 
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise(resolve => setTimeout(resolve, 150));
 
       for (let i = 0; i <= fullSubtitle.length; i++) {
         setSubtitleText(fullSubtitle.substring(0, i));
-        await new Promise(resolve => setTimeout(resolve, 60));
+        await new Promise(resolve => setTimeout(resolve, 30));
       }
 
       setIsButtonVisible(true);
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 200));
       setIsBadgesVisible(true);
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 200));
       setIsStatsVisible(true);
     };
 
     const timer = setTimeout(() => {
       typeAnimation();
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);

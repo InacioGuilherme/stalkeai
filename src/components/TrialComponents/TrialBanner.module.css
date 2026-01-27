@@ -27,9 +27,9 @@
   }
 }
 
-/* Posição EMBAIXO (acima do BottomNav ou final da página) */
+/* Posição EMBAIXO (acima do BottomNav) */
 .bottomPosition {
-  bottom: 66px; /* altura do BottomNav */
+  bottom: 56px; /* altura exata do BottomNav */
   animation: slideUp 0.3s ease-out;
 }
 

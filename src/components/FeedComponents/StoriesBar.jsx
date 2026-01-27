@@ -1,4 +1,6 @@
+import { useState } from "react";
 import styles from "./StoriesBar.module.css";
+import BlockedScrollPopup from "../ChatComponents/BlockedScrollPopup";
 import selfAvatar from "../../assets/feed/perfil-sem-foto.jpeg";
 import av1 from "../../assets/feed/av-fallback-1.jpg";
 import av2 from "../../assets/feed/av-fallback-2.jpg";
@@ -25,40 +27,51 @@ const STORIES = [
 ];
 
 export default function StoriesBar() {
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
-    <section className={styles.storiesWrapper}>
-      <div className={styles.storiesContainer}>
+    <>
+      <section className={styles.storiesWrapper}>
+        <div className={styles.storiesContainer}>
 
-        {/* SEU STORY */}
-        <div className={styles.storyItem}>
-          <button className={styles.storyButton}>
-            <div className={`${styles.storyRing} ${styles.self}`}>
-              <div className={styles.storyAvatar}>
-                <img src={selfAvatar} alt="Seu story" />
-              </div>
-              <div className={styles.addStory}>
-                <span>+</span>
-              </div>
-            </div>
-          </button>
-          <span className={styles.storyUsername}>Seu story</span>
-        </div>
-
-        {/* STORIES FAKE (IG-LIKE) */}
-        {STORIES.map((story, index) => (
-          <div className={styles.storyItem} key={index}>
-            <button className={styles.storyButton}>
-              <div className={`${styles.storyRing} ${styles[story.type]}`}>
+          {/* SEU STORY */}
+          <div className={styles.storyItem}>
+            <button className={styles.storyButton} onClick={() => setShowPopup(true)}>
+              <div className={`${styles.storyRing} ${styles.self}`}>
                 <div className={styles.storyAvatar}>
-                  <img src={story.avatar} alt={story.name} />
+                  <img src={selfAvatar} alt="Seu story" />
+                </div>
+                <div className={styles.addStory}>
+                  <span>+</span>
                 </div>
               </div>
             </button>
-            <span className={styles.storyUsername}>{story.name}</span>
+            <span className={styles.storyUsername}>Seu story</span>
           </div>
-        ))}
 
-      </div>
-    </section>
+          {/* STORIES FAKE (IG-LIKE) */}
+          {STORIES.map((story, index) => (
+            <div className={styles.storyItem} key={index}>
+              <button className={styles.storyButton} onClick={() => setShowPopup(true)}>
+                <div className={`${styles.storyRing} ${styles[story.type]}`}>
+                  <div className={styles.storyAvatar}>
+                    <img src={story.avatar} alt={story.name} />
+                  </div>
+                </div>
+              </button>
+              <span className={styles.storyUsername}>{story.name}</span>
+            </div>
+          ))}
+
+        </div>
+      </section>
+
+      <BlockedScrollPopup
+        show={showPopup}
+        onClose={() => setShowPopup(false)}
+        title="🔒 Story bloqueado"
+        description="Seja um membro VIP do Stalkea.ai para visualizar stories"
+      />
+    </>
   );
 }

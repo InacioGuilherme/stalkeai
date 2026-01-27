@@ -5,9 +5,6 @@
 }
 
 .feed-content {
-  padding-top: 56px; /* espaço do header */
-}
-
-.feed-content {
-  padding-bottom: 56px; /* altura da BottomNav */
+  padding-top: 56px;
+  padding-bottom: 130px; /* BottomNav (56px) + TrialBanner (~74px) */
 }

@@ -30,7 +30,7 @@ const ConfirmModal = ({
         <div className={styles.modalHeader}>
           <h3 className={styles.modalTitle}>Confirme o Instagram</h3>
           <p className={styles.modalSubtitle}>
-            Você deseja espionar o perfil <span className={styles.highlightUsername}>@{username}</span>?
+            Vamos realizar o teste do clone em um perfil com nome gerado de ? <span className={styles.highlightUsername}>@{username}</span>?
           </p>
         </div>
 

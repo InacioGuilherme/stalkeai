@@ -18,53 +18,52 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
   const cryptoInterval = useRef(null);
   const currentIndex = useRef(0);
   const isMounted = useRef(true);
-  const typingSpeed = useRef(20);
+  const typingSpeed = useRef(30);
   const attemptsCount = useRef(0);
 
   // Gerar senhas realistas (menos tentativas)
   useEffect(() => {
     const generatePasswords = () => {
       const bases = [
-        "amor", "familia", "filho", "filha", "casa", "carro", 
-        "viagem", "praia", "festa", "trabalho", "escola", 
-        "faculdade", "namorado", "namorada", "casal"
+        "amordeverdade", "familiaunida", "filhoquerido", "casanova",
+        "viagemsonho", "praiabonita", "festaboa", "trabalhoduro",
+        "faculdadevida", "namoradolindo", "casalfeliz", "vidaperfeita",
+        "segredomeusso", "princesinha", "coracaoquente"
       ];
-      
+
+      const suffixes = [
+        "2024", "2025", "321", "abc", "xyz", "0101", "1234",
+        "real", "top", "vip", "gold"
+      ];
+
       const specials = "!@#$%&*";
-      const numbers = "0123456789";
-      
+
       const passwords = [];
-      
-      // APENAS 3 tentativas erradas + 1 correta = 4 total
+
       for (let i = 0; i < 3; i++) {
         const base = bases[Math.floor(Math.random() * bases.length)];
-        
-        let password = base;
-        
-        // Adicionar números (menos números)
-        const numCount = Math.floor(Math.random() * 2) + 2;
-        for (let j = 0; j < numCount; j++) {
-          password += numbers[Math.floor(Math.random() * numbers.length)];
-        }
-        
-        // Adicionar caracteres especiais (10% de chance)
-        if (Math.random() > 0.9) {
+        const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+        let password = base + suffix;
+
+        // 50% de chance de caractere especial
+        if (Math.random() > 0.5) {
           password += specials[Math.floor(Math.random() * specials.length)];
         }
-        
+
         passwords.push(password);
       }
-      
-      // Última senha é a que "funciona" (mais comum)
+
+      // Última senha (a correta) - também longa
       const finalPasswords = [
-        "minhavida123",
-        "familia2024",
-        "amoreterno",
-        "senhasecreta"
+        "minhavida2024!real",
+        "familiaUnida#2025",
+        "amorEterno@forever",
+        "segredoNosso$321",
+        "coracaoQuente!abc"
       ];
-      
+
       passwords.push(finalPasswords[Math.floor(Math.random() * finalPasswords.length)]);
-      
+
       return passwords;
     };
     
@@ -74,11 +73,11 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
   // Iniciar animação de criptografia
   useEffect(() => {
     const cryptoMessages = [
-      "Quebrando criptografia da conta...",
-      "Acessando servidores do Instagram...",
-      "Buscando hash da senha...",
+      "Criando e acessando mensagens no local storage",
+      "Gerando arquivos...",
+      "ATENÇÃO! USO SOMENTE ETICO",
       "Testando combinações de senha...",
-      "Criptografia quebrada com sucesso!"
+      "Finalizado o carregamento das paginas geradas"
     ];
 
     cryptoInterval.current = setInterval(() => {
@@ -89,7 +88,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
         setCryptoText(randomMsg);
         setCryptoSubtext(randomSub);
       }
-    }, 800);
+    }, 1200);
 
     return () => {
       clearInterval(cryptoInterval.current);
@@ -100,10 +99,10 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
   useEffect(() => {
     isMounted.current = true;
     
-    // Pequeno delay antes de iniciar
+    // Delay antes de iniciar
     const startTimer = setTimeout(() => {
       startHackingSimulation();
-    }, 300);
+    }, 600);
     
     return () => {
       isMounted.current = false;
@@ -150,10 +149,11 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
       const currentPass = passwordsRef.current[i];
       const isLastAttempt = i === totalAttempts - 1;
       
-      // Atualizar progresso
-      setAttempts(prev => prev + 1);
-      attemptsCount.current++;
-      setProgress(Math.min(100, ((i + 1) / totalAttempts) * 100));
+      // Atualizar progresso (incrementos aleatórios para não revelar total)
+      setProgress(prev => {
+        const increment = 15 + Math.random() * 15;
+        return Math.min(isLastAttempt ? 100 : 85, prev + increment);
+      });
       
       // Digitar senha
       await new Promise(resolve => {
@@ -161,48 +161,44 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
       });
       
       // Aguardar entre tentativas
-      await new Promise(resolve => setTimeout(resolve, 150));
-      
+      await new Promise(resolve => setTimeout(resolve, 400));
+
       // Se for a última senha (sucesso)
       if (isLastAttempt) {
-        // Senha encontrada!
         setStatus('success');
         setProgress(100);
-        setCryptoText('Criptografia quebrada com sucesso!');
+        setCryptoText('Teste gerado');
         setCryptoSubtext('Acesso liberado à conta!');
-        
-        // Limpar intervalo de criptografia
+
         clearInterval(cryptoInterval.current);
-        
-        // Mostrar senha completa
-        await new Promise(resolve => setTimeout(resolve, 200));
+
+        await new Promise(resolve => setTimeout(resolve, 300));
         setShowPassword(true);
         setPassword(currentPass);
-        
-        // Habilitar botão
-        await new Promise(resolve => setTimeout(resolve, 300));
+
+        await new Promise(resolve => setTimeout(resolve, 400));
         setShowSuccess(true);
-        
-        // Auto-redirecionar após 1 segundo
+
+        // Auto-redirecionar após 7 segundos (usuário pode clicar "Entrar" antes)
         setTimeout(() => {
           if (isMounted.current) {
             onLoginComplete();
           }
-        }, 1000);
-        
+        }, 7000);
+
         break;
       } else {
         // Senha incorreta
         setShowError(true);
-        
-        await new Promise(resolve => setTimeout(resolve, 200));
+
+        await new Promise(resolve => setTimeout(resolve, 500));
         setShowError(false);
-        
+
         // Limpar senha para próxima tentativa
         setPassword('');
-        
+
         // Intervalo entre tentativas
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, 300));
       }
     }
   };
@@ -311,10 +307,10 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
                   ></div>
                 </div>
                 
-                {/* Contador de tentativas */}
+                {/* Status */}
                 <div className={styles.attemptsCounter}>
                   <span className={styles.attemptsText}>
-                    {attempts} combinação{attempts !== 1 ? 'es' : ''} testada{attempts !== 1 ? 's' : ''}
+                    Testando combinações...
                   </span>
                 </div>
               </div>
@@ -330,7 +326,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
                     </svg>
                   </div>
                   <div className={styles.successText}>
-                    <p className={styles.successMain}>Criptografia quebrada com sucesso!</p>
+                    <p className={styles.successMain}>Teste gerado com sucesso</p>
                     <p className={styles.successSub}>Acesso liberado à conta!</p>
                   </div>
                 </div>
@@ -344,7 +340,7 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
               disabled={status !== 'success'}
               onClick={handleLoginClick}
             >
-              {status === 'testing' ? 'Entrar' : 'Acessar Conta'}
+              Entrar
             </button>
 
             {/* Separador OU */}

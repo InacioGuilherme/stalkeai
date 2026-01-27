@@ -1,11 +1,16 @@
+import { useState } from "react";
 import styles from "./ChatAudioMe.module.css";
+import BlockedScrollPopup from "./BlockedScrollPopup";
 
 export default function ChatAudioMe({ duration = "0:13", showTranscript = true }) {
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
+    <>
     <div className={styles.message}>
       <div className={styles.bubble}>
         <div className={styles.audioRecebido}>
-          <button type="button" className={styles.audioRecebidoPlayBtn} aria-label="Reproduzir áudio">
+          <button type="button" className={styles.audioRecebidoPlayBtn} aria-label="Reproduzir áudio" onClick={() => setShowPopup(true)}>
             <i className="fas fa-play"></i>
           </button>
           
@@ -50,5 +55,13 @@ export default function ChatAudioMe({ duration = "0:13", showTranscript = true }
         </div>
       </div>
     </div>
+
+    <BlockedScrollPopup
+      show={showPopup}
+      onClose={() => setShowPopup(false)}
+      title="🔒 Conteúdo bloqueado"
+      description="Apenas membros VIP podem ouvir mensagens de áudio"
+    />
+    </>
   );
 }

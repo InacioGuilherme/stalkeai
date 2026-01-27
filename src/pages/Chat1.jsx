@@ -9,6 +9,7 @@ import ChatMessageOther from "../components/ChatComponents/ChatMessageOther";
 import ChatMessageMe from "../components/ChatComponents/ChatMessageMe";
 import ChatMessageImage from "../components/ChatComponents/ChatMessageImage";
 import ChatAudioOther from "../components/ChatComponents/ChatAudioOther";
+import OldMessage from "../components/ChatComponents/OldMessage";
 import nudeImage from "../assets/chat/nudes1-chat1.jpg";
 
 export default function Chat1() {
@@ -37,37 +38,41 @@ export default function Chat1() {
       <ChatHeader />
       <ChatBody>
         {/* ===== MENSAGENS MUITO ANTIGAS (BLUR FORTE) ===== */}
-        <ChatMessageTime time="1 SEMANA ATRÁS" />
+        <OldMessage>
+          <ChatMessageTime time="1 SEMANA ATRÁS" />
+          <ChatMessageOther text="Oi amor" />
+          <ChatMessageMe text="Oi bb" />
+          <ChatMessageOther text="Saudades" showAvatar={false} />
+          <ChatMessageMe text="Tbm ❤️" />
+        </OldMessage>
 
-        <ChatMessageOther text="Oi amor" />
-        <ChatMessageMe text="Oi bb" />
-        <ChatMessageOther text="Saudades" showAvatar={false} />
-        <ChatMessageMe text="Tbm ❤️" />
-        
-        <ChatMessageTime time="6 DIAS ATRÁS" />
-        
-        <ChatMessageOther text="Bom dia 😘" />
-        <ChatMessageMe text="Bom dia amor" />
-        <ChatMessageOther text="Que horas sai?" showAvatar={false} />
-        <ChatMessageMe text="Umas 18h" />
-        <ChatMessageOther text="Blz" showAvatar={false} />
-        
-        <ChatMessageTime time="5 DIAS ATRÁS" />
-        
-        <ChatMessageOther text="Oi delícia" />
-        <ChatMessageMe text="Oii" />
-        <ChatMessageMe text="To com sdd" />
-        <ChatMessageOther text="Eu também amor" showAvatar={false} />
-        <ChatMessageOther text="Vem me ver?" showAvatar={false} />
-        <ChatMessageMe text="Vou sim" />
-        
-        <ChatMessageTime time="4 DIAS ATRÁS" />
-        
-        <ChatMessageOther text="E aí?" />
-        <ChatMessageMe text="Fala" />
-        <ChatMessageOther text="Nada, você sumiu" showAvatar={false} />
-        <ChatMessageMe text="Desculpa, tava ocupado" />
-        <ChatMessageOther text="Tá bom" showAvatar={false} reaction="😔" />
+        <OldMessage>
+          <ChatMessageTime time="6 DIAS ATRÁS" />
+          <ChatMessageOther text="Bom dia 😘" />
+          <ChatMessageMe text="Bom dia amor" />
+          <ChatMessageOther text="Que horas sai?" showAvatar={false} />
+          <ChatMessageMe text="Umas 18h" />
+          <ChatMessageOther text="Blz" showAvatar={false} />
+        </OldMessage>
+
+        <OldMessage>
+          <ChatMessageTime time="5 DIAS ATRÁS" />
+          <ChatMessageOther text="Oi delícia" />
+          <ChatMessageMe text="Oii" />
+          <ChatMessageMe text="To com sdd" />
+          <ChatMessageOther text="Eu também amor" showAvatar={false} />
+          <ChatMessageOther text="Vem me ver?" showAvatar={false} />
+          <ChatMessageMe text="Vou sim" />
+        </OldMessage>
+
+        <OldMessage>
+          <ChatMessageTime time="4 DIAS ATRÁS" />
+          <ChatMessageOther text="E aí?" />
+          <ChatMessageMe text="Fala" />
+          <ChatMessageOther text="Nada, você sumiu" showAvatar={false} />
+          <ChatMessageMe text="Desculpa, tava ocupado" />
+          <ChatMessageOther text="Tá bom" showAvatar={false} reaction="😔" />
+        </OldMessage>
 
         {/* ===== CONVERSA PRINCIPAL ===== */}
         <ChatMessageTime time="3 DIAS ATRÁS, 11:12" />

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./DirectItem.module.css";
-import TrialBanner from "../TrialComponents/TrialBanner";
 
 import chat1Av from "../../assets/direct/chat1.png";
 import av7 from "../../assets/direct/av-fallback-7.jpg";
@@ -15,7 +14,7 @@ import av11 from "../../assets/direct/av-fallback-11.jpg";
 import av8 from "../../assets/direct/av-fallback-8.jpg";
 import av6 from "../../assets/direct/av-fallback-6.jpg";
 
-export default function DirectItem() {
+export default function DirectItem({ lockedRef }) {
   const navigate = useNavigate();
 
   return (
@@ -142,6 +141,9 @@ export default function DirectItem() {
         </div>
       </div>
 
+      {/* Sentinel entre chats acessíveis e bloqueados */}
+      <div ref={lockedRef} />
+
       {/* ===== CHATS BLOQUEADOS (COM CADEADO) ===== */}
       {[
         { name: "The*****", avatar: av9, time: "2 d", message: "Enviou um reel de dr.diegooficial" },
@@ -156,6 +158,12 @@ export default function DirectItem() {
         { name: "Fel*****", avatar: av11, time: "4 d", message: "Curtiu sua mensagem" },
         { name: "Dan*****", avatar: av4, time: "6 d", message: "Enviado quinta-feira" },
         { name: "Fel*****", avatar: av8, time: "1 sem", message: "Respondeu com 👍" },
+        { name: "Isa*****", avatar: av6, time: "1 sem", message: "Enviou uma foto" },
+        { name: "Raf*****", avatar: av12, time: "1 sem", message: "Vem cá 😏" },
+        { name: "Bia*****", avatar: av9, time: "2 sem", message: "Respondeu ao seu story" },
+        { name: "Gui*****", avatar: av4, time: "2 sem", message: "Curtiu sua mensagem" },
+        { name: "Mar*****", avatar: av11, time: "2 sem", message: "Enviou um reel" },
+        { name: "Vic*****", avatar: av10, time: "3 sem", message: "Saudades 💕" },
       ].map(({ name, avatar, time, message }, i) => (
         <div className={`${styles.chatItem} ${styles.chatLocked}`} key={i}>
           <div className={styles.chatAvatarContainer}>

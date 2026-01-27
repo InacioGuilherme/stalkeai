@@ -95,6 +95,7 @@
   gap: 6px;
   font-size: 13px;
   color: #fff;
+  cursor: pointer;
 }
 
 .actionItem img {

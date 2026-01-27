@@ -8,6 +8,9 @@
 
 html {
   scroll-behavior: smooth;
+  touch-action: manipulation; /* previne double-tap zoom */
+  -webkit-text-size-adjust: 100%; /* previne auto-resize de texto iOS */
+  -ms-text-size-adjust: 100%;
 }
 
 body {
@@ -20,6 +23,21 @@ body {
   color: #fff;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent; /* remove highlight azul no tap */
+  -webkit-touch-callout: none; /* previne menu de contexto iOS */
+  user-select: none; /* previne seleção de texto acidental */
+  overscroll-behavior: none; /* previne pull-to-refresh */
+}
+
+/* Permitir seleção apenas em inputs */
+input, textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Input font-size 16px previne zoom automático no iOS */
+input, select, textarea {
+  font-size: 16px !important;
 }
 
 #root {

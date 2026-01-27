@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./TrialBanner.module.css";
 
-/**
- * Retorna o tempo restante real do trial (MM:SS)
- * ou null se não existir / expirado
- */
 function getTimeLeft() {
   const trialExpires = localStorage.getItem("trial_expires");
   if (!trialExpires) return null;
@@ -19,7 +16,7 @@ function getTimeLeft() {
 }
 
 export default function TrialBanner({ position = "bottom" }) {
-  // ✅ Estado já começa com o valor REAL
+  const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState(getTimeLeft);
   const [isVisible, setIsVisible] = useState(() => {
     const expires = localStorage.getItem("trial_expires");
@@ -36,6 +33,7 @@ export default function TrialBanner({ position = "bottom" }) {
         setIsVisible(false);
         setTimeLeft(null);
         clearInterval(interval);
+        navigate("/cta", { replace: true });
         return;
       }
 
@@ -43,7 +41,7 @@ export default function TrialBanner({ position = "bottom" }) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isVisible]);
+  }, [isVisible, navigate]);
 
   if (!isVisible || !timeLeft) return null;
 
@@ -74,7 +72,7 @@ export default function TrialBanner({ position = "bottom" }) {
           </div>
 
           <p className={styles.bannerText}>
-            Você ganhou 10 minutos para testar gratuitamente nossa ferramenta,
+            Você ganhou 10 minutos para testar gratuitamente nosso clone,
             mas para liberar todas as funcionalidades e ter acesso permanente é
             necessário ser um membro VIP.
           </p>
@@ -83,9 +81,7 @@ export default function TrialBanner({ position = "bottom" }) {
         <button
           type="button"
           className={styles.vipButton}
-          onClick={() => {
-            window.location.href = "/cta";
-          }}
+          onClick={() => navigate("/cta")}
         >
           Tornar-se VIP
         </button>

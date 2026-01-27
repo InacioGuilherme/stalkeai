@@ -4,13 +4,12 @@
 - Sempre responda em **português brasileiro**.
 
 ## Sobre o Projeto
-**Stalkea** é uma aplicação web que simula uma ferramenta de análise de contas do Instagram. É um projeto client-side only (sem backend real), com dados mockados e animações interativas.
+**Stalkea** é uma aplicação web que simula uma ferramenta de análise de contas do Instagram e um clone da interface. É um projeto client-side only (sem backend real), com dados mockados e animações interativas.
 
 ### Fluxo Principal
 1. Landing page com animação de digitação e contador de estatísticas
 2. Input de username com modal de confirmação de perfil
-3. Tela de login fake do Instagram com simulação de "quebra de senha"
-4. Redirecionamento para Feed, Direct e páginas de Chat (Chat1-Chat5)
+3. Redirecionamento para Feed, Direct e páginas de Chat (Chat1-Chat5)
 
 ## Tech Stack
 - **Framework:** React 19 (Create React App)
