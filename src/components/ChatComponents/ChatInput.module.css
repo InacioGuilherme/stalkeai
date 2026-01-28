@@ -8,7 +8,7 @@
   right: 0;
   bottom: 0;
 
-  height: 64px; /* 🔴 ALTURA REAL DO INPUT */
+  height: 60px; /* 🔴 ALTURA REAL DO INPUT */
 
   padding: 8px 10px;
   box-sizing: border-box;
@@ -41,8 +41,8 @@
 /* ===== CAMERA ROXA (ESQUERDA) ===== */
 
 .chatInputCamera {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
 
   background: #5b4dff;
   border-radius: 50%;
@@ -56,8 +56,8 @@
 }
 
 .chatInputCamera img {
-  width: 32px;
-  height: 26px;
+  width: 30px;
+  height: 24px;
   filter: brightness(0) invert(1);
 }
 
@@ -103,6 +103,6 @@
 @supports (padding: env(safe-area-inset-bottom)) {
   .chatInputContainer {
     padding-bottom: calc(8px + env(safe-area-inset-bottom));
-    height: calc(64px + env(safe-area-inset-bottom));
+    height: calc(60px + env(safe-area-inset-bottom));
   }
 }

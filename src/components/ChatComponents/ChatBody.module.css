@@ -4,8 +4,8 @@
 
 .chatBody {
   position: fixed;
-  top: 56px;
-  bottom: 66px;
+  top: 50px;
+  bottom: 62px;
   left: 0;
   right: 0;
   overflow-y: auto;

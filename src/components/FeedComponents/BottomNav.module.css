@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   z-index: 60;
-  height: 56px;
+  height: 52px;
   padding: 0 18px;
   display: flex;
   align-items: center;
@@ -15,8 +15,8 @@
 
 /* BOTÕES BASE */
 .navBtn {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +43,7 @@
 
 /* + CENTRAL */
 .navPlus {
-  font-size: 33px;
+  font-size: 30px;
   font-weight: 200;
   line-height: 1;       /* ISSO CORRIGE O "TORTO" */
 }

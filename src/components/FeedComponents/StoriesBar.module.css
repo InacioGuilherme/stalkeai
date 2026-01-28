@@ -1,5 +1,5 @@
 .storiesWrapper {
-  padding: 12px 16px;
+  padding: 10px 14px;
   overflow-x: auto;
 }
 
@@ -9,7 +9,7 @@
 
 .storiesContainer {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 /* ITEM */
@@ -29,8 +29,8 @@
 
 /* ANEL */
 .storyRing {
-  width: 79px;
-  height: 79px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   padding: 3px;
   background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
@@ -72,18 +72,18 @@
   position: absolute;
   bottom: -2px;
   right: -2px;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #f9f9f9;
-  border: 2.6px solid rgb(31, 41, 55);
+  border: 2.4px solid rgb(31, 41, 55);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .addStory span {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: rgb(31, 41, 55);
 }
@@ -92,7 +92,7 @@
 .storyUsername {
   font-size: 12px;
   color: rgb(209, 213, 219);
-  max-width: 70px;
+  max-width: 66px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

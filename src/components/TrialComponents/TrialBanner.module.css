@@ -5,14 +5,14 @@
   right: 0;
   z-index: 900;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 12px 16px;
+  padding: 11px 15px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   pointer-events: auto;
 }
 
 /* Posição NO TOPO (abaixo do header) */
 .topPosition {
-  top: 56px; /* altura do header */
+  top: 50px; /* altura do header */
   animation: slideDown 0.3s ease-out;
 }
 
@@ -29,7 +29,7 @@
 
 /* Posição EMBAIXO (acima do BottomNav) */
 .bottomPosition {
-  bottom: 56px; /* altura exata do BottomNav */
+  bottom: 52px; /* altura exata do BottomNav */
   animation: slideUp 0.3s ease-out;
 }
 
@@ -96,7 +96,7 @@
   color: #667eea;
   border: none;
   border-radius: 18px;
-  padding: 8px 18px;
+  padding: 8px 17px;
   font-size: 13px;
   font-weight: 600;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;

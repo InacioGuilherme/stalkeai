@@ -24,7 +24,7 @@
 
 .storiesScroll {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   padding: 0px 16px 0;
   overflow-x: auto;
   overflow-y: visible;
@@ -43,12 +43,12 @@
 
 .storyCard {
   position: relative;
-  width: 82px;
+  width: 78px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 42px;
+  padding-top: 40px;
   overflow: visible;
 }
 
@@ -57,8 +57,8 @@
    =============================== */
 
 .storyAvatar {
-  width: 80px;
-  height: 80px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
   background: rgb(31, 41, 55);
   overflow: hidden;
@@ -82,14 +82,14 @@
    =============================== */
 
 .storyUsername {
-  font-size: 12.5px;
+  font-size: 12px;
   color: rgb(209, 213, 219);
-  max-width: 82px;
+  max-width: 78px;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 8px;
+  margin-top: 7px;
 }
 
 .storyUsername.own {
@@ -102,7 +102,7 @@
 
 .storyNote {
   position: absolute;
-  top: 18px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -115,8 +115,8 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 5px 9px;
-  width: 88px;
-  max-width: 88px;
+  width: 84px;
+  max-width: 84px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
   pointer-events: none;
   will-change: transform;
