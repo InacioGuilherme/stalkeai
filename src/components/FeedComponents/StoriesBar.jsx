@@ -14,16 +14,16 @@ import av9 from "../../assets/feed/av-fallback-9.jpg";
 import av10 from "../../assets/feed/av-fallback-10.jpg";
 
 const STORIES = [
-  { name: "Ped*****", type: "locked", avatar: av1 },
-  { name: "Lor*****", type: "locked", avatar: av2 },
-  { name: "Swi*****", type: "locked", avatar: av3 },
-  { name: "Enz*****", type: "locked", avatar: av4 },
-  { name: "Lau*****", type: "locked", avatar: av5 },
-  { name: "Joã*****", type: "locked", avatar: av6 },
-  { name: "The*****", type: "locked", avatar: av7 },
-  { name: "Bea*****", type: "locked", avatar: av8 },
-  { name: "Sop*****", type: "locked", avatar: av9 },
-  { name: "Let*****", type: "locked", avatar: av10 },
+  { name: "Pe*****", type: "locked", avatar: av1 },
+  { name: "Lo*****", type: "locked", avatar: av2 },
+  { name: "Sw*****", type: "locked", avatar: av3 },
+  { name: "En*****", type: "locked", avatar: av4 },
+  { name: "La*****", type: "locked", avatar: av5 },
+  { name: "Jo*****", type: "locked", avatar: av6 },
+  { name: "Th*****", type: "locked", avatar: av7 },
+  { name: "Be*****", type: "locked", avatar: av8 },
+  { name: "So*****", type: "locked", avatar: av9 },
+  { name: "Le*****", type: "locked", avatar: av10 },
 ];
 
 export default function StoriesBar() {

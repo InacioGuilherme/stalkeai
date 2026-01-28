@@ -101,9 +101,13 @@ const Home = () => {
 
   const fetchAvatarAsBase64 = async (imageUrl) => {
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
       const proxyRes = await fetch(
-        `/api/proxy-image?url=${encodeURIComponent(imageUrl)}`
+        `/api/proxy-image?url=${encodeURIComponent(imageUrl)}`,
+        { signal: controller.signal }
       );
+      clearTimeout(timeoutId);
       if (!proxyRes.ok) throw new Error('Proxy falhou');
       const { base64 } = await proxyRes.json();
       return base64;
@@ -123,9 +127,14 @@ const Home = () => {
     setIsLoading(true);
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+
       const response = await fetch(
-        `https://www.searchapi.io/api/v1/search?engine=instagram_profile&username=${encodeURIComponent(cleanUsername)}&api_key=AHZyZZs5YrMXeh2Tc6TFLCvv`
+        `/api/search-profile?username=${encodeURIComponent(cleanUsername)}`,
+        { signal: controller.signal }
       );
+      clearTimeout(timeoutId);
 
       if (!response.ok) throw new Error('Erro na API');
 
@@ -198,31 +207,20 @@ const Home = () => {
     setShowConfirmModal(false);
     setShowInstagramLogin(true);
 
-    // ====== PASSO 1: INICIAR TRIAL DE 10 MINUTOS ======
+    // ====== PASSO 1: INICIAR TRIAL DE 5 MINUTOS ======
     const cleanUsername = username.trim().replace(/^@+/, '');
-    
-    // 1. Salvar o username
+
     localStorage.setItem('current_username', cleanUsername);
-    
-    // 2. Salvar timestamp de INÍCIO do trial (agora)
+
     const now = Date.now();
     localStorage.setItem('trial_start', now.toString());
-    
-    // 3. Calcular timestamp de EXPIRAÇÃO (agora + 10 minutos)
-    const tenMinutes = 10 * 60 * 1000; // 10 minutos em milissegundos
-    const trialExpires = now + tenMinutes;
+
+    const fiveMinutes = 5 * 60 * 1000;
+    const trialExpires = now + fiveMinutes;
     localStorage.setItem('trial_expires', trialExpires.toString());
-    
-    // 4. Marcar que o trial está ATIVO
+
     localStorage.setItem('trial_active', 'true');
-    
-    // 5. Salvar dados do perfil (para reutilizar depois)
     localStorage.setItem('current_profile', JSON.stringify(modalProfileData));
-    
-    console.log('✅ Trial de 10 minutos INICIADO!');
-    console.log('👤 Username:', cleanUsername);
-    console.log('🕐 Início:', new Date(now).toLocaleTimeString());
-    console.log('⏰ Expira em:', new Date(trialExpires).toLocaleTimeString());
     // ====================================================
   };
 

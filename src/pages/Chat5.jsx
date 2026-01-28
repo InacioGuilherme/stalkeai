@@ -23,10 +23,12 @@ export default function Chat5() {
   const [dateText, setDateText] = useState("");
 
   useEffect(() => {
-    // Buscar cidade do IP (mesmo padrão do Chat1)
+    const controller = new AbortController();
     async function fetchLocation() {
       try {
-        const res = await fetch("https://wtfismyip.com/json");
+        const res = await fetch("https://wtfismyip.com/json", {
+          signal: controller.signal,
+        });
         if (!res.ok) return;
         const data = await res.json();
         if (data?.YourFuckingLocation) {
@@ -47,6 +49,7 @@ export default function Chat5() {
     ];
     const weekday = weekdays[twoDaysAhead.getDay()];
     setDateText(`Dia ${day} ${weekday}`);
+    return () => controller.abort();
   }, []);
 
   return (

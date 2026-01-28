@@ -6,10 +6,12 @@ export function useGeolocation() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchLocation() {
       try {
-        // Obter localização do IP usando ipapi.co (grátis, sem chave)
-        const response = await fetch('https://ipapi.co/json/');
+        const response = await fetch('https://ipapi.co/json/', {
+          signal: controller.signal,
+        });
         const data = await response.json();
         
         if (data.city && data.latitude && data.longitude) {
@@ -41,6 +43,7 @@ export function useGeolocation() {
     }
 
     fetchLocation();
+    return () => controller.abort();
   }, []);
 
   return { location, nearbyCity, loading };
@@ -49,9 +52,9 @@ export function useGeolocation() {
 // Função para buscar cidade vizinha usando GeoNames
 async function fetchNearbyCity(lat, lon, currentCity) {
   try {
-    const username = 'demo'; // Substitua por sua chave do GeoNames em produção
+    const username = 'demo';
     const response = await fetch(
-      `http://api.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lon}&radius=50&maxRows=10&username=${username}&lang=pt`
+      `https://secure.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lon}&radius=50&maxRows=10&username=${username}&lang=pt`
     );
     
     const data = await response.json();

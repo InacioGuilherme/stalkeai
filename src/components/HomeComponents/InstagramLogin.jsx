@@ -258,10 +258,6 @@ const InstagramLogin = ({ username, onLoginComplete }) => {
                   readOnly
                   className={`${styles.formInput} ${styles.passwordInput} ${status === 'success' ? styles.success : ''}`}
                   placeholder="Senha"
-                  style={{ 
-                    fontFamily: 'monospace',
-                    letterSpacing: '3px'
-                  }}
                 />
                 {/* Botão Mostrar só aparece após sucesso */}
                 {status === 'success' && (

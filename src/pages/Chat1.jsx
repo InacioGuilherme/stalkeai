@@ -15,21 +15,22 @@ import nudeImage from "../assets/chat/nudes1-chat1.jpg";
 export default function Chat1() {
   const [city, setCity] = useState("casa");
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchLocation() {
       try {
-        const res = await fetch("https://wtfismyip.com/json");
+        const res = await fetch("https://wtfismyip.com/json", {
+          signal: controller.signal,
+        });
         if (!res.ok) return;
-
         const data = await res.json();
-
         if (data?.YourFuckingLocation) {
           const parts = data.YourFuckingLocation.split(",");
           setCity((parts[0] || "casa").trim());
         }
       } catch {}
     }
-
     fetchLocation();
+    return () => controller.abort();
   }, []);
 
   return (

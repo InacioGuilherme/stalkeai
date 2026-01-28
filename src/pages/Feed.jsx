@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import FeedHeader from "../components/FeedComponents/FeedHeader";
 import StoriesBar from "../components/FeedComponents/StoriesBar";
 import FeedPost from "../components/FeedComponents/FeedPost";
@@ -20,26 +21,58 @@ import av9 from "../assets/feed/av-fallback-9.jpg";
 import av10 from "../assets/feed/av-fallback-10.jpg";
 import av11 from "../assets/feed/av-fallback-11.jpg";
 import av12 from "../assets/feed/av-fallback-12.jpg";
+import avatarNicolas from "../assets/feed/avatarnicolas.jpg";
+import postagemNicolas from "../assets/feed/postagemnicolas.jpg";
 
 const POSTS = [
-  { username: "And*****", avatar: avChat2, likes: 204, comments: 73, time: "Agora" },
-  { username: "Jo*****", avatar: avChat1, likes: 89, comments: 32, time: "23 min" },
-  { username: "\u{1D56D}\u{1D597}\u{1D59A}****", avatar: avChat3, likes: 312, comments: 41, time: "1 h" },
-  { username: "Mel*****", avatar: av7, likes: 156, comments: 28, time: "3 h" },
-  { username: "Ped*****", avatar: av3, likes: 67, comments: 15, time: "5 h" },
-  { username: "The*****", avatar: av9, likes: 421, comments: 89, time: "8 h" },
-  { username: "Lau*****", avatar: av4, likes: 178, comments: 54, time: "9 h" },
-  { username: "Enz*****", avatar: av1, likes: 95, comments: 19, time: "11 h" },
-  { username: "Bea*****", avatar: av8, likes: 543, comments: 112, time: "14 h" },
-  { username: "Sop*****", avatar: av2, likes: 267, comments: 63, time: "16 h" },
-  { username: "Let*****", avatar: av5, likes: 134, comments: 37, time: "19 h" },
-  { username: "Mar*****", avatar: av6, likes: 389, comments: 78, time: "21 h" },
-  { username: "Gab*****", avatar: av10, likes: 72, comments: 11, time: "23 h" },
-  { username: "Isa*****", avatar: av11, likes: 451, comments: 96, time: "1 d" },
-  { username: "Raf*****", avatar: av12, likes: 213, comments: 45, time: "1 d" },
+  { username: "An*****", avatar: avChat2, postImage: av5, likes: 204, comments: 8, time: "26 de janeiro de 2025", description: "Mais um dia incrível 🌅✨" },
+  { username: "Ni*****", avatar: avatarNicolas, postImage: postagemNicolas, likes: 1600000, comments: 34700, time: "24 de janeiro de 2025", imageBlur: 8, avatarBlur: 2 },
+  { username: "Br*****", avatar: avChat3, postImage: av8, likes: 312, comments: 5, time: "19 de janeiro de 2025" },
+  { username: "Me*****", avatar: av7, postImage: av2, likes: 156, comments: 3, time: "12 de janeiro de 2025" },
+  { username: "Pe*****", avatar: av3, postImage: av11, likes: 67, comments: 2, time: "3 de janeiro de 2025" },
+  { username: "Th*****", avatar: av9, postImage: av4, likes: 421, comments: 12, time: "28 de dezembro de 2024" },
+  { username: "La*****", avatar: av4, postImage: av10, likes: 178, comments: 6, time: "21 de dezembro de 2024" },
+  { username: "En*****", avatar: av1, postImage: av6, likes: 95, comments: 1, time: "14 de dezembro de 2024" },
+  { username: "Be*****", avatar: av8, postImage: av3, likes: 543, comments: 14, time: "5 de dezembro de 2024" },
+  { username: "So*****", avatar: av2, postImage: av9, likes: 267, comments: 7, time: "27 de novembro de 2024" },
+  { username: "Le*****", avatar: av5, postImage: av1, likes: 134, comments: 4, time: "18 de novembro de 2024" },
+  { username: "Ma*****", avatar: av6, postImage: av12, likes: 389, comments: 9, time: "9 de novembro de 2024" },
+  { username: "Ga*****", avatar: av10, postImage: av7, likes: 72, comments: 2, time: "31 de outubro de 2024" },
+  { username: "Is*****", avatar: av11, postImage: avChat1, likes: 451, comments: 11, time: "14 de outubro de 2024" },
+  { username: "Ra*****", avatar: av12, postImage: avChat2, likes: 213, comments: 5, time: "2 de outubro de 2024" },
 ];
 
 export default function Feed() {
+  const [city, setCity] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    async function fetchLocation() {
+      try {
+        const res = await fetch("https://ipapi.co/json/", {
+          signal: controller.signal,
+        });
+        const data = await res.json();
+        if (data?.city) {
+          setCity(data.city);
+          return;
+        }
+      } catch {}
+      try {
+        const res = await fetch("https://wtfismyip.com/json", {
+          signal: controller.signal,
+        });
+        const data = await res.json();
+        if (data?.YourFuckingLocation) {
+          const parts = data.YourFuckingLocation.split(",");
+          setCity((parts[0] || "").trim());
+        }
+      } catch {}
+    }
+    fetchLocation();
+    return () => controller.abort();
+  }, []);
+
   return (
     <div className="feed-page">
       <FeedHeader />
@@ -55,6 +88,11 @@ export default function Feed() {
             comments={post.comments}
             time={post.time}
             blurLevel={index}
+            location={index === 0 && city ? city : post.location}
+            description={post.description}
+            postImage={post.postImage}
+            imageBlur={post.imageBlur}
+            avatarBlur={post.avatarBlur}
           />
         ))}
       </main>

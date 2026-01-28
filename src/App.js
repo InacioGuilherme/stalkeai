@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
 import Direct from "./pages/Direct";
@@ -11,9 +12,20 @@ import Cta from "./pages/Cta";
 import TrialGuard from "./components/TrialComponents/TrialGuard";
 import "./index.css";
 
+function PageViewTracker() {
+  const location = useLocation();
+  useEffect(() => {
+    if (window.fbq) {
+      window.fbq('track', 'PageView');
+    }
+  }, [location.pathname]);
+  return null;
+}
+
 function App() {
   return (
     <BrowserRouter>
+      <PageViewTracker />
       <Routes>
         {/* HOME SEM BLOQUEIO */}
         <Route path="/" element={<Home />} />

@@ -4,17 +4,31 @@ import BlockedScrollPopup from "../ChatComponents/BlockedScrollPopup";
 
 import likeIcon from "../../assets/feed/coracao.svg";
 import commentIcon from "../../assets/feed/comentario.svg";
-import repostIcon from "../../assets/feed/repost.svg";
 import sendIcon from "../../assets/feed/enviar.svg";
 import saveIcon from "../../assets/feed/salvar.svg";
 
-export default function FeedPost({ username, avatar, likes, comments, time, blurLevel = 0 }) {
+function formatNumber(n) {
+  if (n >= 1000000) {
+    const val = (n / 1000000).toFixed(1).replace(".", ",");
+    return `${val} mi`;
+  }
+  if (n >= 1000) {
+    const val = (n / 1000).toFixed(n >= 10000 ? 1 : 0).replace(".", ",");
+    return `${val} mil`;
+  }
+  return n.toLocaleString("pt-BR");
+}
+
+export default function FeedPost({ username, avatar, likes, comments, time, blurLevel = 0, location, description, postImage, imageBlur, avatarBlur }) {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleBlocked = () => setShowPopup(true);
 
   const blur = Math.max(0, (blurLevel - 2) * 1.5);
   const postStyle = blur > 0 ? { filter: `blur(${blur}px)` } : undefined;
+
+  const finalAvatarBlur = avatarBlur !== undefined ? avatarBlur : 5;
+  const avatarStyle = { filter: `blur(${finalAvatarBlur}px)` };
 
   return (
     <>
@@ -23,17 +37,29 @@ export default function FeedPost({ username, avatar, likes, comments, time, blur
         {/* HEADER */}
         <header className={styles.postHeader}>
           <div className={styles.postUser}>
-            <img src={avatar} alt="Usuário" className={styles.postAvatar} />
-            <span className={styles.postUsername}>{username}</span>
+            <div className={styles.postAvatarWrapper}>
+              <img src={avatar} alt="" className={styles.postAvatar} style={avatarStyle} />
+            </div>
+            <div className={styles.postUserInfo}>
+              <span className={styles.postUsername}>{username}</span>
+              {location && <span className={styles.postLocation}>{location}</span>}
+            </div>
           </div>
-
-          <button className={styles.postMenu} onClick={handleBlocked}>⋯</button>
+          <button className={styles.postMenu} onClick={handleBlocked}>•••</button>
         </header>
 
-        {/* CONTEÚDO BLOQUEADO */}
+        {/* IMAGEM */}
         <div className={styles.postImageContainer} onClick={handleBlocked}>
+          <img
+            src={postImage || avatar}
+            alt=""
+            className={styles.postImage}
+            style={{
+              filter: `blur(${imageBlur !== undefined ? imageBlur : 30}px)`,
+              transform: "scale(1.15)",
+            }}
+          />
           <div className={styles.postRestricted}>
-
             <svg
               className={styles.restrictedIcon}
               fill="none"
@@ -44,45 +70,52 @@ export default function FeedPost({ username, avatar, likes, comments, time, blur
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="1.6"
-                d="M12 11c1.1 0 2-.9 2-2V7a2 2 0 10-4 0v2c0 1.1.9 2 2 2zm6 0v7a2 2 0 01-2 2H8a2 2 0 01-2-2v-7a2 2 0 012-2h8a2 2 0 012 2z"
+                d="M16.5 10.5V8a4.5 4.5 0 10-9 0v2.5M9 10.5h6a3 3 0 013 3v4.5a3 3 0 01-3 3H9a3 3 0 01-3-3v-4.5a3 3 0 013-3z"
               />
             </svg>
-
             <p className={styles.restrictedTitle}>Conteúdo restrito</p>
-            <p className={styles.restrictedTime}>{time} · 16:53</p>
           </div>
         </div>
 
         {/* AÇÕES */}
         <div className={styles.postActions}>
           <div className={styles.postActionsLeft}>
-
-            <div className={styles.actionItem} onClick={handleBlocked}>
+            <button className={styles.actionBtn} onClick={handleBlocked}>
               <img src={likeIcon} alt="Curtir" />
-              <span>{likes}</span>
-            </div>
-
-            <div className={styles.actionItem} onClick={handleBlocked}>
+            </button>
+            <button className={styles.actionBtn} onClick={handleBlocked}>
               <img src={commentIcon} alt="Comentar" />
-              <span>{comments}</span>
-            </div>
-
-            <div className={styles.actionItem} onClick={handleBlocked}>
-              <img src={repostIcon} alt="Repostar" />
-            </div>
-
-            <div className={styles.actionItem} onClick={handleBlocked}>
+            </button>
+            <button className={styles.actionBtn} onClick={handleBlocked}>
               <img src={sendIcon} alt="Enviar" />
-            </div>
-
+            </button>
           </div>
-
-          <div className={styles.actionItem} onClick={handleBlocked}>
+          <button className={styles.actionBtn} onClick={handleBlocked}>
             <img src={saveIcon} alt="Salvar" />
-          </div>
+          </button>
         </div>
 
-        {/* TEMPO */}
+        {/* CURTIDAS */}
+        <div className={styles.postLikes} onClick={handleBlocked}>
+          {formatNumber(likes)} curtidas
+        </div>
+
+        {/* DESCRIÇÃO */}
+        {description && (
+          <div className={styles.postDescription}>
+            <span className={styles.postDescriptionUser}>{username}</span>
+            <span className={styles.postDescriptionText}>{description}</span>
+          </div>
+        )}
+
+        {/* COMENTÁRIOS */}
+        {comments > 0 && (
+          <div className={styles.postCommentsLink} onClick={handleBlocked}>
+            Ver todos os {formatNumber(comments)} comentários
+          </div>
+        )}
+
+        {/* DATA */}
         <div className={styles.postTime}>{time}</div>
 
       </article>

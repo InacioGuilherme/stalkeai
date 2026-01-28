@@ -1,4 +1,4 @@
-/* Instagram Login - TEMA PRETO */
+/* Instagram Login - TEMA PRETO (Mobile-first) */
 .instagramLoginScreen {
   position: fixed;
   inset: 0;
@@ -7,10 +7,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 16px;
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   overflow-y: auto;
   min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-overflow-scrolling: touch;
 }
 
 .instagramContainer {
@@ -22,25 +26,26 @@
   gap: 10px;
 }
 
-/* Card Principal - Réplica do Instagram */
+/* Card Principal */
 .instagramCard {
   background: #000000;
   border: 1px solid #333333;
   border-radius: 12px;
-  padding: 40px 40px 30px;
+  padding: 30px 20px 24px;
   text-align: center;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Logo Instagram */
 .instagramLogo {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   display: flex;
   justify-content: center;
 }
 
 .instaLogoImg {
-  height: 60px;
+  height: 50px;
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
@@ -50,7 +55,7 @@
 .instagramForm {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
 }
 
@@ -66,19 +71,21 @@
   width: 100%;
 }
 
-/* Inputs - Réplica exata Instagram */
+/* Inputs */
 .formInput {
   width: 100%;
-  padding: 13px 15px;
+  padding: 12px 14px;
   border: 1px solid #3a3a3a;
   border-radius: 6px;
   background: #121212;
-  font-size: 14px;
+  font-size: 16px;
   color: #ffffff;
   height: 44px;
   outline: none;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .formInput:focus {
@@ -100,10 +107,10 @@
 
 .passwordInput {
   font-family: monospace !important;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color: #ffffff;
-  padding-right: 60px;
-  font-size: 15px;
+  padding-right: 65px;
+  font-size: 16px;
 }
 
 .passwordInput.success {
@@ -115,7 +122,7 @@
 /* Botão Mostrar/Ocultar */
 .showPasswordBtn {
   position: absolute;
-  right: 12px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.05);
@@ -124,10 +131,12 @@
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  padding: 4px 10px;
+  padding: 6px 10px;
   border-radius: 4px;
   transition: all 0.2s;
   z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .showPasswordBtn:hover {
@@ -200,18 +209,19 @@
 .loginBtn {
   width: 100%;
   padding: 12px;
-  margin: 8px 0;
+  margin: 6px 0;
   background: #0095f6;
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 14.5px;
+  font-size: 14px;
   cursor: pointer;
-  height: 40px;
+  height: 44px;
   opacity: 0.7;
   transition: all 0.2s;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .loginBtn.active {
@@ -233,7 +243,7 @@
 .separator {
   display: flex;
   align-items: center;
-  margin: 18px 0;
+  margin: 14px 0;
   color: #8e8e8e;
   width: 100%;
 }
@@ -257,13 +267,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin: 8px 0;
+  gap: 8px;
+  margin: 6px 0;
   cursor: pointer;
   text-decoration: none;
-  padding: 8px;
+  padding: 10px 8px;
   border-radius: 8px;
   transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .facebookLogin:hover {
@@ -303,9 +314,10 @@
   background: #000000;
   border: 1px solid #333333;
   border-radius: 12px;
-  padding: 24px;
+  padding: 20px;
   text-align: center;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .signupText {
@@ -343,29 +355,130 @@
   }
 }
 
-/* Responsividade */
-@media (max-width: 450px) {
-  .instagramContainer {
-    max-width: 100%;
-  }
-  
+/* Desktop */
+@media (min-width: 420px) {
   .instagramCard {
-    padding: 35px 25px 25px;
-    border: 1px solid #333;
+    padding: 40px 40px 30px;
   }
-  
-  .signupCard {
-    padding: 20px;
-    border: 1px solid #333;
-  }
-  
+
   .instaLogoImg {
-    height: 55px;
+    height: 60px;
   }
-  
-  .cryptoWarning {
-    font-size: 11px;
-    padding: 6px 10px;
+
+  .instagramLogo {
+    margin-bottom: 30px;
+  }
+
+  .cryptoIcon,
+  .successIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cryptoSpinner,
+  .successCheck {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cryptoMain,
+  .successMain {
+    font-size: 14px;
+  }
+
+  .cryptoSub,
+  .successSub {
+    font-size: 12px;
+  }
+
+  .cryptoHeader,
+  .successHeader {
+    gap: 14px;
+  }
+}
+
+/* Telas muito pequenas (iPhone SE, Galaxy S5) */
+@media (max-width: 359px) {
+  .instagramLoginScreen {
+    padding: 12px;
+  }
+
+  .instagramCard {
+    padding: 24px 16px 20px;
+    border-radius: 10px;
+  }
+
+  .instaLogoImg {
+    height: 42px;
+  }
+
+  .instagramLogo {
+    margin-bottom: 20px;
+  }
+
+  .formInput {
+    height: 40px;
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .passwordInput {
+    padding-right: 58px;
+  }
+
+  .loginBtn {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .cryptoBreaking,
+  .successBreaking {
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+  }
+
+  .cryptoIcon,
+  .successIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .cryptoSpinner,
+  .successCheck {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cryptoMain,
+  .successMain {
+    font-size: 12px;
+  }
+
+  .cryptoSub,
+  .successSub {
+    font-size: 10px;
+  }
+
+  .signupCard {
+    padding: 16px;
+  }
+
+  .signupText {
+    font-size: 13px;
+  }
+
+  .separator {
+    margin: 10px 0;
+  }
+
+  .fbIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .fbText {
+    font-size: 13px;
   }
 }
 
@@ -387,15 +500,17 @@
   background: #555555;
 }
 
-/* Quebrando Criptografia - Estilo do site original */
+/* Quebrando Criptografia */
 .cryptoBreaking {
   border: 1px solid #3a3a3a;
-  border-radius: 12px;
-  padding: 16px;
-  margin: 12px 0;
+  border-radius: 10px;
+  padding: 14px;
+  margin: 10px 0;
   background: rgba(12, 16, 17, 0.8);
   backdrop-filter: blur(10px);
   animation: fadeInUp 0.3s ease;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 @keyframes fadeInUp {
@@ -412,13 +527,14 @@
 .cryptoHeader {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
+  min-width: 0;
 }
 
 .cryptoIcon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: linear-gradient(135deg, #4a37b6, #ab58f4);
   display: flex;
@@ -428,8 +544,8 @@
 }
 
 .cryptoSpinner {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: white;
   animation: spin 1.2s linear infinite;
 }
@@ -442,21 +558,29 @@
 .cryptoText {
   flex: 1;
   text-align: left;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .cryptoMain {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #e0e0e0;
-  margin: 0 0 4px 0;
+  margin: 0 0 3px 0;
   line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cryptoSub {
-  font-size: 12px;
+  font-size: 11px;
   color: #8e8e8e;
   margin: 0;
   line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Barra de progresso */
@@ -511,15 +635,17 @@
   letter-spacing: 0.3px;
 }
 
-/* Sucesso - Estilo do site original */
+/* Sucesso */
 .successBreaking {
   border: 1px solid rgba(0, 255, 136, 0.3);
-  border-radius: 12px;
-  padding: 16px;
-  margin: 12px 0;
+  border-radius: 10px;
+  padding: 14px;
+  margin: 10px 0;
   background: rgba(0, 255, 136, 0.05);
   backdrop-filter: blur(10px);
   animation: successPop 0.4s ease;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 @keyframes successPop {
@@ -539,12 +665,13 @@
 .successHeader {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
+  min-width: 0;
 }
 
 .successIcon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: linear-gradient(135deg, #10b981, #059669);
   display: flex;
@@ -554,8 +681,8 @@
 }
 
 .successCheck {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: white;
   stroke-width: 3;
 }
@@ -563,18 +690,19 @@
 .successText {
   flex: 1;
   text-align: left;
+  min-width: 0;
 }
 
 .successMain {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #10b981;
-  margin: 0 0 4px 0;
+  margin: 0 0 3px 0;
   line-height: 1.3;
 }
 
 .successSub {
-  font-size: 12px;
+  font-size: 11px;
   color: #8e8e8e;
   margin: 0;
   line-height: 1.3;
@@ -597,8 +725,4 @@
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.6; }
-}
-
-.cryptoSpinner {
-  animation: spin 0.8s linear infinite;
 }
